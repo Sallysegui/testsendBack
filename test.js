@@ -14,12 +14,10 @@ app.use(cors())
 app.use(bodyParser.json());
 
 
-// app.use(cors({
-//     origin: 'http://127.0.0.1:3000',
-// }))
-// POST request handler
+
 app.post('/api/test', (req, res) => {
     // Retrieve data from the request body
+    console.log('to sending')
     console.log(req.body)
     // const {email} = req.body;
     
@@ -33,6 +31,7 @@ app.post('/api/test', (req, res) => {
 
 app.get('/', (req, res) => {
     res.send('Welcome to my server!');
+    console.log('welcome')
   });
 // Define the port number
 const PORT = process.env.PORT || 3000;

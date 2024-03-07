@@ -66,7 +66,7 @@ app.post('/api/test', (req, res) => {
         from: 'sallysegui10@gmail.com',
         to : email,
         subject: 'AMX Support inquiry has been received',
-        text : 'For clients with plaintext support only',
+        text : 'AMX Support',
         html:
         `<!DOCTYPE html>
         <html lang="en">
@@ -146,7 +146,6 @@ app.post('/api/test', (req, res) => {
         from: 'sallysegui10@gmail.com',
         to : email,
         subject: 'An inquiry has been submitted through the website contact form',
-        text : 'For clients with plaintext support only',
         html:
         `<!DOCTYPE html>
         <html lang="en">

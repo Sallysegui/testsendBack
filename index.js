@@ -133,7 +133,7 @@ app.use(bodyParser.json());
 // //     </html>`,
 // //     attachments: [{
 // //         filename: 'logoBrowswe.png',
-// //         path: 'images' + '/logoBrowswe.png',
+// //         path: 'images' + '/logo.png',
 // //         cid: 'myImg'
 // //       }]
 // // }

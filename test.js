@@ -57,7 +57,7 @@ const transporter = nodemailer.createTransport({
 
 app.post('/api/test', (req, res) => {
     // Retrieve data from the request body
-    const{ name, email, message} = req.body
+    const{ name, email, message, phoneNumber} = req.body
 
     console.log(name)
     console.log(email)
@@ -196,6 +196,9 @@ app.post('/api/test', (req, res) => {
                 <p>Dear Michaella,</p>
                 <p>An inquiry has been submitted through the website contact form with the following message:</p>
                 <p>${message}</p>
+                <p> from ${name}</p>
+                <p> email ${email}</p>
+                <p> email ${phoneNumber}</p>
                 <p>Best regards,<br>AMX Support Team</p>
                 <div class="logo">
                     <img src="cid:myImg" alt="AMX Support Logo">

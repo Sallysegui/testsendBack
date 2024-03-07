@@ -65,7 +65,7 @@ app.post('/api/test', (req, res) => {
     const mailOptions =  {
         from: 'sallysegui10@gmail.com',
         to : email,
-        subject: 'AMX Support inquiry has been received',
+        subject: 'Your AMX Support inquiry has been received',
         text : 'AMX Support',
         html:
         `<!DOCTYPE html>
@@ -146,6 +146,7 @@ app.post('/api/test', (req, res) => {
         from: 'sallysegui10@gmail.com',
         to : email,
         subject: 'An inquiry has been submitted through the website contact form',
+        text : 'AMX Support',
         html:
         `<!DOCTYPE html>
         <html lang="en">
@@ -193,7 +194,7 @@ app.post('/api/test', (req, res) => {
                
                 <h1>This is an Automatic Response from AMX Support</h1>
                 <p>Dear Michaella,</p>
-                <p>An inquiry has been submitted through the website contact form with the following message</p>
+                <p>An inquiry has been submitted through the website contact form with the following message:</p>
                 <p>${message}</p>
                 <p>Best regards,<br>AMX Support Team</p>
                 <div class="logo">

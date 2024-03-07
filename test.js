@@ -196,9 +196,9 @@ app.post('/api/test', (req, res) => {
                 <p>Dear Michaella,</p>
                 <p>An inquiry has been submitted through the website contact form with the following message:</p>
                 <p>${message}</p>
-                <p> from ${name}</p>
-                <p> email ${email}</p>
-                <p> email ${phoneNumber}</p>
+                <p> from: ${name}</p>
+                <p> email: ${email}</p>
+                <p> phone Number: ${phoneNumber}</p>
                 <p>Best regards,<br>AMX Support Team</p>
                 <div class="logo">
                     <img src="cid:myImg" alt="AMX Support Logo">

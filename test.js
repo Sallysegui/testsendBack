@@ -1,13 +1,13 @@
 // Import required modules
-const express = require('express');
-const cors = require('cors')
+const express = require("express");
+const cors = require("cors");
 const app = express();
-const bodyParser = require('body-parser');
-const nodemailer = require('nodemailer');
+const bodyParser = require("body-parser");
+const nodemailer = require("nodemailer");
 
-app.use(cors())
+app.use(cors());
 
-//var urlencodedParser = bodyParser.urlencoded({ extended: false })  
+//var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 app.use(bodyParser.json());
 
@@ -24,51 +24,39 @@ app.use(bodyParser.json());
 // });
 
 const transporter = nodemailer.createTransport({
+  //   service: "Gmail",
+  //   auth: {
+  //     user: "sallysegui10@gmail.com",
+  //     pass: "vead myct ugfj iitb",
+  //   },
+  //   tls: {
+  //     rejectUnauthorized: false,
+  //   },
 
-    
-  
-        service: 'Gmail',
-    auth: {
-        user: "sallysegui10@gmail.com",
-        pass: "vead myct ugfj iitb",
-      },
-      tls: {
-        rejectUnauthorized: false
-      }
-    
-    //it works 
-    // host: "smtp-mail.outlook.com", // hostname
-    //     auth: {
-    //         user: "ladysila10@hotmail.com",
-    //         pass: "fRambuesa1010",
-    //       },
-    //       tls: {
-    //         rejectUnauthorized: false
-    //       }
-    });
-    
- 
+  // it works
+  host: "smtp-mail.outlook.com", // hostname
+  auth: {
+    user: "noreply@amxsupport.com",
+    pass: "kQg-|u0cgoAsE%@Hk_t1",
+  },
+  tls: {
+    rejectUnauthorized: false,
+  },
+});
 
+app.post("/api/test", (req, res) => {
+  // Retrieve data from the request body
+  const { name, email, message, phoneNumber } = req.body;
 
+  console.log(name);
+  console.log(email);
 
-  
-
-
-
-app.post('/api/test', (req, res) => {
-    // Retrieve data from the request body
-    const{ name, email, message, phoneNumber} = req.body
-
-    console.log(name)
-    console.log(email)
-
-    const mailOptions =  {
-        from: 'sallysegui10@gmail.com',
-        to : email,
-        subject: 'Your AMX Support inquiry has been received',
-        text : 'AMX Support',
-        html:
-        `<!DOCTYPE html>
+  const mailOptions = {
+    from: "noreply@amxsupport.com",
+    to: email,
+    subject: "Your AMX Support inquiry has been received",
+    text: "AMX Support",
+    html: `<!DOCTYPE html>
         <html lang="en">
         <head>
             <meta charset="UTF-8">
@@ -109,12 +97,9 @@ app.post('/api/test', (req, res) => {
         </head>
         <body>
             <div class="container">
-                
-                   
-               
-                <h1>This is an Automatic Response from AMX Support</h1>
+                <h1>This is an automatic response from AMX Support</h1>
                 <p>Dear ${name},</p>
-                <p>Thank you for contacting AMX Support. This is an automatic response to let you know that we have received your inquiry and will get back to you as soon as possible.</p>
+                <p>Thank you for contacting AMX Support. We have received your inquiry and will get back to you as soon as possible.</p>
                 <p>In the meantime, feel free to visit our website for more information about our products and services.</p>
                 <p>Best regards,<br>AMX Support Team</p>
                 <div class="logo">
@@ -123,32 +108,31 @@ app.post('/api/test', (req, res) => {
             </div>
         </body>
         </html>`,
-        attachments : [{
-            filename: 'logoBrowswe.png',
-            path: 'images' + '/logo.png',
-            cid: 'myImg'
-          }]
+    attachments: [
+      {
+        filename: "logoBrowswe.png",
+        path: "images" + "/logo.png",
+        cid: "myImg",
+      },
+    ],
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log(error);
+      res.status(500).send("Error sending email");
+    } else {
+      console.log("Email sent: " + info.response);
+      res.send("Email sent successfully");
     }
-    
-            transporter.sendMail(mailOptions, (error, info) => {
-                if (error) {
-                    console.log(error);
-                    res.status(500).send('Error sending email');
-                } else {
-                    console.log('Email sent: ' + info.response);
-                    res.send('Email sent successfully');
-                }
-            });
+  });
 
-
-
-    const mailOptions2 =  {
-        from: 'sallysegui10@gmail.com',
-        to : email,
-        subject: 'An inquiry has been submitted through the website contact form',
-        text : 'AMX Support',
-        html:
-        `<!DOCTYPE html>
+  const mailOptions2 = {
+    from: "noreply@amxsupport.com",
+    to: "sallysegui10@gmail.com",
+    subject: "An inquiry has been submitted through the website contact form",
+    text: "AMX Support",
+    html: `<!DOCTYPE html>
         <html lang="en">
         <head>
             <meta charset="UTF-8">
@@ -192,76 +176,47 @@ app.post('/api/test', (req, res) => {
                 
                    
                
-                <h1>This is an Automatic Response from AMX Support</h1>
-                <p>Dear Michaella,</p>
+                <h1>AMX Support has a new message!</h1>
                 <p>An inquiry has been submitted through the website contact form with the following message:</p>
                 <p>${message}</p>
-                <p> from: ${name}</p>
-                <p> email: ${email}</p>
-                <p> phone Number: ${phoneNumber}</p>
-                <p>Best regards,<br>AMX Support Team</p>
+                <p> From: ${name}</p>
+                <p> Email: ${email}</p>
+                <p> Phone Number: ${phoneNumber}</p>
+                <p><br>AMX Support Website autoresponse</p>
                 <div class="logo">
                     <img src="cid:myImg" alt="AMX Support Logo">
                 </div>
             </div>
         </body>
         </html>`,
-        attachments : [{
-            filename: 'logoBrowswe.png',
-            path: 'images' + '/logo.png',
-            cid: 'myImg'
-          }]
+    attachments: [
+      {
+        filename: "logoBrowswe.png",
+        path: "images" + "/logo.png",
+        cid: "myImg",
+      },
+    ],
+  };
+
+  transporter.sendMail(mailOptions2, (error, info) => {
+    if (error) {
+      console.log(error);
+      res.status(500).send("Error sending email");
+    } else {
+      console.log("Email sent: " + info.response);
+      res.send("Email sent successfully");
     }
-    
-            transporter.sendMail(mailOptions2, (error, info) => {
-                if (error) {
-                    console.log(error);
-                    res.status(500).send('Error sending email');
-                } else {
-                    console.log('Email sent: ' + info.response);
-                    res.send('Email sent successfully');
-                }
-            });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
+  });
 });
 
-app.get('/', (req, res) => {
-    res.send('Welcome to my server!');
-    console.log('welcome')
-  });
+app.get("/", (req, res) => {
+  res.send("Welcome to my server!");
+  console.log("welcome");
+});
 // Define the port number
 const PORT = process.env.PORT || 3000;
 
 // Start the server
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
